@@ -1,0 +1,3238 @@
+{
+	"info": {
+		"_postman_id": "5420472a-9827-4c67-b2a7-5cf992bd3728",
+		"name": "Restaurant menu management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34655126",
+		"_collection_link": "https://bikash-projects.postman.co/workspace/Bikash's-Workspace~07b4d747-08b6-4eac-9f94-41a4bad205fa/collection/34655126-5420472a-9827-4c67-b2a7-5cf992bd3728?action=share&source=collection_link&creator=34655126"
+	},
+	"item": [
+		{
+			"name": "Superadmin",
+			"item": [
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "social login",
+							"item": [
+								{
+									"name": "login callback",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = pm.response.json()",
+													"pm.environment.set('access_token', response.data.access_token)",
+													"pm.environment.set('refresh_token', response.data.refresh_token)"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "token",
+													"value": "ya29.a0AXooCgur1qEE611RspsFCUHc7y5iz1i4EmX2c4cFnIIaEnHxRtx1N9J031PA65VH9YJhqKBBSKQNWXBIuYWvr0SbN9K0Ik1cGrv03QChKVyfrUocp-7xp18LYlNKiRaLwy8U9Ula_k_UJpFpYJDz0ZIVw30DPrWoGgaCgYKAT0SARESFQHGX2MichbLPyfbCWa92GDy5Lm0Bw0169",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/superadmin/login/:provider/callback",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"superadmin",
+												"login",
+												":provider",
+												"callback"
+											],
+											"query": [
+												{
+													"key": "token",
+													"value": "ya29.a0AXooCgs91JS3ma9otvfd31bmsiF-wE6swNvPrgxtKLJGbWzFa7CDQGWwQNr4KeXLbAJllh6GAaCgMQfk69PMVYLQ2oxf3snHqh_7svmah2BDk3BT4_nklFm-u9a090oKUwKnDa4AmIj9BbHVkmNSC-xV37AL8tvi8ux3aCgYKAbESARESFQHGX2MiXZ5Dx_vnYZTDGQ_uMCTZ1g0171",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "provider",
+													"value": "google",
+													"description": "google,facebook,linkedin"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json()\r",
+											"pm.environment.set('access_token', response.data.access_token)\r",
+											"pm.environment.set('refresh_token', response.data.refresh_token)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "superadmin@superadmin.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "P@ssw0rd",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "refresh token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json()\r",
+											"pm.environment.set('access_token', response.data.access_token)\r",
+											"pm.environment.set('refresh_token', response.data.refresh_token)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/refresh-token/:refresh_token",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"refresh-token",
+										":refresh_token"
+									],
+									"variable": [
+										{
+											"key": "refresh_token",
+											"value": "{{refresh_token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json()\r",
+											"pm.environment.set('access_token', null)\r",
+											"pm.environment.set('refresh_token', null)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/superadmin/logout",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user detail",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {},
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/user-detail",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"user-detail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user detail update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "Super admin",
+											"type": "text"
+										},
+										{
+											"key": "profile_image",
+											"type": "file",
+											"src": "/home/bikash/Downloads/9-2-free-free-download-png.png"
+										},
+										{
+											"key": "delete_image",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "mobile_no",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "location",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/update-user-detail",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"update-user-detail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "change password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "old_password",
+											"value": "P@ssw0rd1",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "P@ssw0rd",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "P@ssw0rd",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/change-password",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"change-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/delete-user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"delete-user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "first_name",
+											"value": "aug",
+											"type": "text"
+										},
+										{
+											"key": "middle_name",
+											"value": "x",
+											"type": "text"
+										},
+										{
+											"key": "last_name",
+											"value": "developer",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "augxdeveloper@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "P@ssw0rd",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "P@ssw0rd",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/home/bikash/Downloads/khalti-logo.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/register",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "resend email verification mail",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "xipope9775@agaseo.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/resend-account-verification-mail",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"resend-account-verification-mail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "resend email verification otp mail",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "xipope9775@agaseo.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/resend-account-verification-otp-mail",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"resend-account-verification-otp-mail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "account verification",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "token",
+											"value": "289452",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "augxdeveloper@gmail.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/account-verification",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"account-verification"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "reset password mail",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "augxdeveloper@gmail.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/reset-password-mail",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"reset-password-mail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "reset password otp mail",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "augxdeveloper@gmail.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/reset-password-otp-mail",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"reset-password-otp-mail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "reset password otp verification",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "token",
+											"value": "392833",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "augxdeveloper@gmail.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/reset-password-otp-verification",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"reset-password-otp-verification"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "reset password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "password",
+											"value": "P@ssw0rd",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "P@ssw0rd",
+											"type": "text"
+										},
+										{
+											"key": "token",
+											"value": "392833",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "augxdeveloper@gmail.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/reset-password",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"reset-password"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Role",
+					"item": [
+						{
+							"name": "list",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/superadmin/role?paginate=1&limit=5&page=1&search_keyword=",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"role"
+									],
+									"query": [
+										{
+											"key": "paginate",
+											"value": "1",
+											"description": "1||0"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "search_keyword",
+											"value": "",
+											"description": "||name"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "single",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/superadmin/role/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"role",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "store",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "tarijin366@avastu.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "P@ssw0rd",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "P@ssw0rd",
+											"type": "text"
+										},
+										{
+											"key": "first_name",
+											"value": "user 2",
+											"type": "text"
+										},
+										{
+											"key": "middle_name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "last_name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "roles[]",
+											"value": "admin",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "active",
+											"description": "active,inactive",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/home/bikash/Downloads/logo-01.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "patch",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "tarijin366@avastu.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "P@ssw0rd",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "P@ssw0rd",
+											"type": "text"
+										},
+										{
+											"key": "first_name",
+											"value": "user 2",
+											"type": "text"
+										},
+										{
+											"key": "middle_name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "last_name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "roles[]",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "active",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/user/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"user",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/user/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"user",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "list",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/superadmin/user?paginate=1&limit=5&page=1&status=&search_keyword&role=&roles=&superadmin_panel_users=",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"user"
+									],
+									"query": [
+										{
+											"key": "paginate",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "status",
+											"value": "",
+											"description": "||active,inactive"
+										},
+										{
+											"key": "search_keyword",
+											"value": null
+										},
+										{
+											"key": "role",
+											"value": "",
+											"description": "superadmin"
+										},
+										{
+											"key": "roles",
+											"value": "",
+											"description": "[\"superadmin\",\"admin\"]"
+										},
+										{
+											"key": "superadmin_panel_users",
+											"value": "",
+											"description": "1|0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "single",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/superadmin/user/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"user",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "assign role",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "company-id",
+										"value": "1"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"roles\": [\n        \"admin\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/user/:id/assign-role",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"user",
+										":id",
+										"assign-role"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "12"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Dashboard",
+					"item": [
+						{
+							"name": "dashboard",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/superadmin/dashboard",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"dashboard"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Site Setting",
+					"item": [
+						{
+							"name": "site setting",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/superadmin/site-setting",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"site-setting"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "site setting update or create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Scodus",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "Nepal",
+											"type": "text"
+										},
+										{
+											"key": "primary_email",
+											"value": "info@scodus.com",
+											"type": "text"
+										},
+										{
+											"key": "secondary_email",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "primary_phone",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "secondary_phone",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "map_location",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "registration_number",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "linkedin_url",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "facebook_url",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "twitter_url",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "youtube_url",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "instagram_url",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "logo",
+											"type": "file",
+											"src": "/C:/Users/Scodus/Downloads/logoB.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/site-setting",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"site-setting"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Restaurant",
+					"item": [
+						{
+							"name": "list",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/restaurant?paginate=1&page=1&limit=5&search_keyword=&status=&owner_id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"restaurant"
+									],
+									"query": [
+										{
+											"key": "paginate",
+											"value": "1"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "search_keyword",
+											"value": ""
+										},
+										{
+											"key": "status",
+											"value": ""
+										},
+										{
+											"key": "owner_id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/restaurant/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"restaurant",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update status",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "branch-id",
+										"value": "1"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_method\": \"patch\",\n    \"status\": \"active\"//active,inactive\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/superadmin/restaurant/:id/update-status",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"superadmin",
+										"restaurant",
+										":id",
+										"update-status"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "8"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Restaturantadmin",
+			"item": [
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "social login",
+							"item": [
+								{
+									"name": "login callback",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = pm.response.json()",
+													"pm.environment.set('access_token', response.data.access_token)",
+													"pm.environment.set('refresh_token', response.data.refresh_token)"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "token",
+													"value": "ya29.a0AXooCguxZybpcnAP6HrPr-s7WyJWM8iTZrxqilNriqB5dqqXcWGHjn6q4-udpuJ5M7WpjWgCkmY2aBNCx-17ie3VzH_BcOoUo6IHctA1TzX8_DEAwK0vC_FhbXgMVS_WA24XQXpjZy7gKRuXHaCmDEvpdhT-QUVwxQaCgYKARoSARESFQHGX2Mi_KizUKeteEARoghXKF5uaQ0169",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/restaurantadmin/login/:provider/callback",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"restaurantadmin",
+												"login",
+												":provider",
+												"callback"
+											],
+											"variable": [
+												{
+													"key": "provider",
+													"value": "google",
+													"description": "google,facebook,linkedin"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json()\r",
+											"pm.environment.set('access_token', response.data.access_token)\r",
+											"pm.environment.set('refresh_token', response.data.refresh_token)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "mefedod661@adrais.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "P@ssw0rd",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "refresh token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json()\r",
+											"pm.environment.set('access_token', response.data.access_token)\r",
+											"pm.environment.set('refresh_token', response.data.refresh_token)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/refresh-token/:refresh_token",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"refresh-token",
+										":refresh_token"
+									],
+									"variable": [
+										{
+											"key": "refresh_token",
+											"value": "{{refresh_token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json()",
+											"pm.environment.set('access_token', null)",
+											"pm.environment.set('refresh_token', null)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/logout",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user detail",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/user-detail",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"user-detail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user detail update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "first_name",
+											"value": "Super admin",
+											"type": "text"
+										},
+										{
+											"key": "last_name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "middle_name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/home/bikash/Downloads/hurpeslogo.png"
+										},
+										{
+											"key": "remove_image",
+											"value": "",
+											"description": "true,false,1,0",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/update-user-detail",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"update-user-detail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "change password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "old_password",
+											"value": "P@ssw0rd0",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "P@ssw0rd",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "P@ssw0rd",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/change-password",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"change-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/delete-user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"delete-user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "first_name",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "middle_name",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "last_name",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "mefedod661@adrais.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "P@ssw0rd",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "P@ssw0rd",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/Scodus/Downloads/logoB.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/register",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "resend email verification mail",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "augxdeveloper@gmail.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/resend-account-verification-mail",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"resend-account-verification-mail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "resend email verification otp mail",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "xipope9775@agaseo.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/resend-account-verification-otp-mail",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"resend-account-verification-otp-mail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "account verification",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "token",
+											"value": "704498",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "mefedod661@adrais.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/account-verification",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"account-verification"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "reset password mail",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "augxdeveloper@gmail.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/reset-password-mail",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"reset-password-mail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "reset password otp mail",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "xipope9775@agaseo.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/reset-password-otp-mail",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"reset-password-otp-mail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "reset password otp verification",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "token",
+											"value": "208702",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "bikashxsingh@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "user_id",
+											"value": "22",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/reset-password-otp-verification",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"reset-password-otp-verification"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "reset password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "password",
+											"value": "P@ssw0rd",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "P@ssw0rd",
+											"type": "text"
+										},
+										{
+											"key": "token",
+											"value": "737435",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "augxdeveloper@gmail.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/reset-password",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"reset-password"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Dashboard",
+					"item": [
+						{
+							"name": "dashboard",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/dashboard",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"dashboard"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Site Setting",
+					"item": [
+						{
+							"name": "site setting",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/site-setting",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"site-setting"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Restaurant",
+					"item": [
+						{
+							"name": "store",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "ABC",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "ab",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "a@b.com",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "1234567890",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "",
+											"description": "active,inactive",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/restaurant",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"restaurant"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PATCH",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "ABCa",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "azsx",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "aa@b.com",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "1234567890",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "",
+											"description": "active,inactive",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/restaurant/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"restaurant",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update status",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_method\": \"patch\",\n    \"status\": \"active\"//active,inactive\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/restaurant/:id/update-status",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"restaurant",
+										":id",
+										"update-status"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/restaurant/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"restaurant",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "8"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "list",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/restaurant?paginate=1&page=&limit=&search_keyword=",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"restaurant"
+									],
+									"query": [
+										{
+											"key": "paginate",
+											"value": "1"
+										},
+										{
+											"key": "page",
+											"value": ""
+										},
+										{
+											"key": "limit",
+											"value": ""
+										},
+										{
+											"key": "search_keyword",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/restaurant/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"restaurant",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "16"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Menu",
+					"item": [
+						{
+							"name": "store multiple",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "menus[0][order]",
+											"value": "5",
+											"type": "text"
+										},
+										{
+											"key": "menus[0][image]",
+											"type": "file",
+											"src": "/C:/Users/Scodus/Downloads/august.jpg"
+										},
+										{
+											"key": "menus[1][order]",
+											"value": "2",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "menus[1][image]",
+											"type": "file",
+											"src": "/C:/Users/Scodus/Downloads/logoB.jpg",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/menu/multiple",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"menu",
+										"multiple"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "store",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "status",
+											"value": "active",
+											"description": "active,inactive",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/Scodus/Downloads/august.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/menu",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"menu"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PATCH",
+											"type": "text"
+										},
+										{
+											"key": "order",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/Scodus/Pictures/Screenshots/Screenshot (1).png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/menu/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"menu",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update status",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_method\": \"patch\",\n    \"status\": \"active\"//active,inactive\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/menu/:id/update-status",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"menu",
+										":id",
+										"update-status"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/menu/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"menu",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "list",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/menu?paginate=1&page=&limit=&search_keyword=&restaurant_id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"menu"
+									],
+									"query": [
+										{
+											"key": "paginate",
+											"value": "1"
+										},
+										{
+											"key": "page",
+											"value": ""
+										},
+										{
+											"key": "limit",
+											"value": ""
+										},
+										{
+											"key": "search_keyword",
+											"value": ""
+										},
+										{
+											"key": "restaurant_id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/menu/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"menu",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "39"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "attachment rename",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "asdffggg",
+											"type": "text"
+										},
+										{
+											"key": "_method",
+											"value": "PATCH",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/menu/:id/attachment/:file_id/rename",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"menu",
+										":id",
+										"attachment",
+										":file_id",
+										"rename"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "16"
+										},
+										{
+											"key": "file_id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "attachment delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/menu/:id/attachment/:file_id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"menu",
+										":id",
+										"attachment",
+										":file_id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "16"
+										},
+										{
+											"key": "file_id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "attachment dowload",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/menu/:id/attachment/:file_id/download",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"menu",
+										":id",
+										"attachment",
+										":file_id",
+										"download"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "16"
+										},
+										{
+											"key": "file_id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Public",
+			"item": [
+				{
+					"name": "Restaurant",
+					"item": [
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurant/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurant",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

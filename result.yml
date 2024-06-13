@@ -1,0 +1,1801 @@
+openapi: 3.0.0
+info:
+  title: Hospitality Management
+  description: Hospitality Management API documentation
+  version: '1.0'
+  x-logo:
+    url: https://github.com/joolfe/logoBanner.png
+    backgroundColor: '#FFFFFF'
+    altText: logo
+  termsOfService: '#'
+  contact:
+    name: Scodus
+    url: https://scodus.com
+    email: scodusnp@gmail.com
+  license:
+    name: MIT
+    url: https://es.wikipedia.org/wiki/Licencia_MIT
+servers:
+  - url: https://hospitality-api.scoduscorp.com
+    description: server
+components:
+  securitySchemes:
+    noauthAuth:
+      type: http
+      scheme: noauth
+    bearerAuth:
+      type: http
+      scheme: bearer
+tags:
+  - name: Superadmin
+  - name: Superadmin > Authentication
+  - name: Superadmin > Authentication > social login
+  - name: Superadmin > Role
+  - name: Superadmin > User
+  - name: Superadmin > Dashboard
+  - name: Superadmin > Site Setting
+  - name: Superadmin > Restaurant
+  - name: Restaturantadmin
+  - name: Restaturantadmin > Authentication
+  - name: Restaturantadmin > Authentication > social login
+  - name: Restaturantadmin > Dashboard
+  - name: Restaturantadmin > Site Setting
+  - name: Restaturantadmin > Restaurant
+  - name: Restaturantadmin > Menu
+  - name: Public
+  - name: Public > Restaurant
+paths:
+  /api/superadmin/login/{provider}/callback:
+    post:
+      tags:
+        - Superadmin > Authentication > social login
+      summary: login callback
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  example: >-
+                    ya29.a0AXooCgur1qEE611RspsFCUHc7y5iz1i4EmX2c4cFnIIaEnHxRtx1N9J031PA65VH9YJhqKBBSKQNWXBIuYWvr0SbN9K0Ik1cGrv03QChKVyfrUocp-7xp18LYlNKiRaLwy8U9Ula_k_UJpFpYJDz0ZIVw30DPrWoGgaCgYKAT0SARESFQHGX2MichbLPyfbCWa92GDy5Lm0Bw0169
+      parameters:
+        - name: provider
+          in: path
+          schema:
+            type: string
+          required: true
+          description: google,facebook,linkedin
+          example: google
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/login:
+    post:
+      tags:
+        - Superadmin > Authentication
+      summary: login
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: superadmin@superadmin.com
+                password:
+                  type: string
+                  example: P@ssw0rd
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/refresh-token/{refresh_token}:
+    post:
+      tags:
+        - Superadmin > Authentication
+      summary: refresh token
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: refresh_token
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{refresh_token}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/logout:
+    post:
+      tags:
+        - Superadmin > Authentication
+      summary: logout
+      requestBody:
+        content: {}
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/user-detail:
+    get:
+      tags:
+        - Superadmin > Authentication
+      summary: user detail
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/update-user-detail:
+    post:
+      tags:
+        - Superadmin > Authentication
+      summary: user detail update
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                _method:
+                  type: string
+                  example: PUT
+                name:
+                  type: string
+                  example: Super admin
+                profile_image:
+                  type: string
+                  format: binary
+                delete_image:
+                  type: string
+                mobile_no:
+                  type: string
+                location:
+                  type: string
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/change-password:
+    post:
+      tags:
+        - Superadmin > Authentication
+      summary: change password
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                _method:
+                  type: string
+                  example: PUT
+                old_password:
+                  type: string
+                  example: P@ssw0rd1
+                password:
+                  type: string
+                  example: P@ssw0rd
+                password_confirmation:
+                  type: string
+                  example: P@ssw0rd
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/delete-user:
+    delete:
+      tags:
+        - Superadmin > Authentication
+      summary: delete user
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/register:
+    post:
+      tags:
+        - Superadmin > Authentication
+      summary: register
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  example: aug
+                middle_name:
+                  type: string
+                  example: x
+                last_name:
+                  type: string
+                  example: developer
+                email:
+                  type: string
+                  example: augxdeveloper@gmail.com
+                password:
+                  type: string
+                  example: P@ssw0rd
+                password_confirmation:
+                  type: string
+                  example: P@ssw0rd
+                image:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/resend-account-verification-mail:
+    post:
+      tags:
+        - Superadmin > Authentication
+      summary: resend email verification mail
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: xipope9775@agaseo.com
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/resend-account-verification-otp-mail:
+    post:
+      tags:
+        - Superadmin > Authentication
+      summary: resend email verification otp mail
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: xipope9775@agaseo.com
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/account-verification:
+    post:
+      tags:
+        - Superadmin > Authentication
+      summary: account verification
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: integer
+                  example: '289452'
+                email:
+                  type: string
+                  example: augxdeveloper@gmail.com
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/reset-password-mail:
+    post:
+      tags:
+        - Superadmin > Authentication
+      summary: reset password mail
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: augxdeveloper@gmail.com
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/reset-password-otp-mail:
+    post:
+      tags:
+        - Superadmin > Authentication
+      summary: reset password otp mail
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: augxdeveloper@gmail.com
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/reset-password-otp-verification:
+    post:
+      tags:
+        - Superadmin > Authentication
+      summary: reset password otp verification
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: integer
+                  example: '392833'
+                email:
+                  type: string
+                  example: augxdeveloper@gmail.com
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/reset-password:
+    post:
+      tags:
+        - Superadmin > Authentication
+      summary: reset password
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: P@ssw0rd
+                password_confirmation:
+                  type: string
+                  example: P@ssw0rd
+                token:
+                  type: integer
+                  example: '392833'
+                email:
+                  type: string
+                  example: augxdeveloper@gmail.com
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/role:
+    get:
+      tags:
+        - Superadmin > Role
+      summary: list
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: paginate
+          in: query
+          schema:
+            type: integer
+          description: 1||0
+          example: '1'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          example: '5'
+        - name: page
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: search_keyword
+          in: query
+          schema:
+            type: string
+          description: '||name'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/role/{id}:
+    get:
+      tags:
+        - Superadmin > Role
+      summary: single
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '2'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/user:
+    post:
+      tags:
+        - Superadmin > User
+      summary: store
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: tarijin366@avastu.com
+                password:
+                  type: string
+                  example: P@ssw0rd
+                password_confirmation:
+                  type: string
+                  example: P@ssw0rd
+                first_name:
+                  type: string
+                  example: user 2
+                middle_name:
+                  type: string
+                last_name:
+                  type: string
+                roles[]:
+                  type: string
+                  example: admin
+                status:
+                  type: string
+                  description: active,inactive
+                  example: active
+                image:
+                  type: string
+                  format: binary
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Superadmin > User
+      summary: list
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: paginate
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          example: '5'
+        - name: page
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: status
+          in: query
+          schema:
+            type: string
+          description: '||active,inactive'
+        - name: search_keyword
+          in: query
+          schema:
+            type: string
+        - name: role
+          in: query
+          schema:
+            type: string
+          description: superadmin
+        - name: roles
+          in: query
+          schema:
+            type: string
+          description: '["superadmin","admin"]'
+        - name: superadmin_panel_users
+          in: query
+          schema:
+            type: string
+          description: 1|0
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/user/{id}:
+    post:
+      tags:
+        - Superadmin > User
+      summary: update
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                _method:
+                  type: string
+                  example: patch
+                email:
+                  type: string
+                  example: tarijin366@avastu.com
+                password:
+                  type: string
+                  example: P@ssw0rd
+                password_confirmation:
+                  type: string
+                  example: P@ssw0rd
+                first_name:
+                  type: string
+                  example: user 2
+                middle_name:
+                  type: string
+                last_name:
+                  type: string
+                roles[]:
+                  type: string
+                status:
+                  type: string
+                  example: active
+                image:
+                  type: string
+                  format: binary
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '4'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Superadmin > User
+      summary: delete
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '5'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Superadmin > User
+      summary: single
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/user/{id}/assign-role:
+    post:
+      tags:
+        - Superadmin > User
+      summary: assign role
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                roles:
+                  - admin
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: company-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '12'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/dashboard:
+    get:
+      tags:
+        - Superadmin > Dashboard
+      summary: dashboard
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/site-setting:
+    get:
+      tags:
+        - Superadmin > Site Setting
+      summary: site setting
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Superadmin > Site Setting
+      summary: site setting update or create
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Scodus
+                address:
+                  type: string
+                  example: Nepal
+                primary_email:
+                  type: string
+                  example: info@scodus.com
+                secondary_email:
+                  type: string
+                primary_phone:
+                  type: string
+                secondary_phone:
+                  type: string
+                map_location:
+                  type: string
+                registration_number:
+                  type: string
+                linkedin_url:
+                  type: string
+                facebook_url:
+                  type: string
+                twitter_url:
+                  type: string
+                youtube_url:
+                  type: string
+                instagram_url:
+                  type: string
+                logo:
+                  type: string
+                  format: binary
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/restaurant:
+    get:
+      tags:
+        - Superadmin > Restaurant
+      summary: list
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: paginate
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: page
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          example: '5'
+        - name: search_keyword
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+        - name: owner_id
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/restaurant/{id}:
+    get:
+      tags:
+        - Superadmin > Restaurant
+      summary: show
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/superadmin/restaurant/{id}/update-status:
+    post:
+      tags:
+        - Superadmin > Restaurant
+      summary: update status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                _method: patch
+                status: active
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: branch-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '8'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/login/{provider}/callback:
+    post:
+      tags:
+        - Restaturantadmin > Authentication > social login
+      summary: login callback
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  example: >-
+                    ya29.a0AXooCguxZybpcnAP6HrPr-s7WyJWM8iTZrxqilNriqB5dqqXcWGHjn6q4-udpuJ5M7WpjWgCkmY2aBNCx-17ie3VzH_BcOoUo6IHctA1TzX8_DEAwK0vC_FhbXgMVS_WA24XQXpjZy7gKRuXHaCmDEvpdhT-QUVwxQaCgYKARoSARESFQHGX2Mi_KizUKeteEARoghXKF5uaQ0169
+      parameters:
+        - name: provider
+          in: path
+          schema:
+            type: string
+          required: true
+          description: google,facebook,linkedin
+          example: google
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/login:
+    post:
+      tags:
+        - Restaturantadmin > Authentication
+      summary: login
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: mefedod661@adrais.com
+                password:
+                  type: string
+                  example: P@ssw0rd
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/refresh-token/{refresh_token}:
+    post:
+      tags:
+        - Restaturantadmin > Authentication
+      summary: refresh token
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: refresh_token
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{refresh_token}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/logout:
+    post:
+      tags:
+        - Restaturantadmin > Authentication
+      summary: logout
+      requestBody:
+        content: {}
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/user-detail:
+    get:
+      tags:
+        - Restaturantadmin > Authentication
+      summary: user detail
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/update-user-detail:
+    post:
+      tags:
+        - Restaturantadmin > Authentication
+      summary: user detail update
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                _method:
+                  type: string
+                  example: PUT
+                first_name:
+                  type: string
+                  example: Super admin
+                last_name:
+                  type: string
+                middle_name:
+                  type: string
+                image:
+                  type: string
+                  format: binary
+                remove_image:
+                  type: string
+                  description: true,false,1,0
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/change-password:
+    post:
+      tags:
+        - Restaturantadmin > Authentication
+      summary: change password
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                _method:
+                  type: string
+                  example: PUT
+                old_password:
+                  type: string
+                  example: P@ssw0rd0
+                password:
+                  type: string
+                  example: P@ssw0rd
+                password_confirmation:
+                  type: string
+                  example: P@ssw0rd
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/delete-user:
+    delete:
+      tags:
+        - Restaturantadmin > Authentication
+      summary: delete user
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/register:
+    post:
+      tags:
+        - Restaturantadmin > Authentication
+      summary: register
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: integer
+                  example: '1'
+                middle_name:
+                  type: integer
+                  example: '0'
+                last_name:
+                  type: integer
+                  example: '1'
+                email:
+                  type: string
+                  example: mefedod661@adrais.com
+                password:
+                  type: string
+                  example: P@ssw0rd
+                password_confirmation:
+                  type: string
+                  example: P@ssw0rd
+                image:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/resend-account-verification-mail:
+    post:
+      tags:
+        - Restaturantadmin > Authentication
+      summary: resend email verification mail
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: augxdeveloper@gmail.com
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/resend-account-verification-otp-mail:
+    post:
+      tags:
+        - Restaturantadmin > Authentication
+      summary: resend email verification otp mail
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: xipope9775@agaseo.com
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/account-verification:
+    post:
+      tags:
+        - Restaturantadmin > Authentication
+      summary: account verification
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: integer
+                  example: '704498'
+                email:
+                  type: string
+                  example: mefedod661@adrais.com
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/reset-password-mail:
+    post:
+      tags:
+        - Restaturantadmin > Authentication
+      summary: reset password mail
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: augxdeveloper@gmail.com
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/reset-password-otp-mail:
+    post:
+      tags:
+        - Restaturantadmin > Authentication
+      summary: reset password otp mail
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: xipope9775@agaseo.com
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/reset-password-otp-verification:
+    post:
+      tags:
+        - Restaturantadmin > Authentication
+      summary: reset password otp verification
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: integer
+                  example: '208702'
+                email:
+                  type: string
+                  example: bikashxsingh@gmail.com
+                user_id:
+                  type: integer
+                  example: '22'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/reset-password:
+    post:
+      tags:
+        - Restaturantadmin > Authentication
+      summary: reset password
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: P@ssw0rd
+                password_confirmation:
+                  type: string
+                  example: P@ssw0rd
+                token:
+                  type: integer
+                  example: '737435'
+                email:
+                  type: string
+                  example: augxdeveloper@gmail.com
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/dashboard:
+    get:
+      tags:
+        - Restaturantadmin > Dashboard
+      summary: dashboard
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/site-setting:
+    get:
+      tags:
+        - Restaturantadmin > Site Setting
+      summary: site setting
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/restaurant:
+    post:
+      tags:
+        - Restaturantadmin > Restaurant
+      summary: store
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: ABC
+                address:
+                  type: string
+                  example: ab
+                email:
+                  type: string
+                  example: a@b.com
+                phone:
+                  type: integer
+                  example: '1234567890'
+                status:
+                  type: string
+                  description: active,inactive
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Restaturantadmin > Restaurant
+      summary: list
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: paginate
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: page
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: string
+        - name: search_keyword
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/restaurant/{id}:
+    post:
+      tags:
+        - Restaturantadmin > Restaurant
+      summary: update
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                _method:
+                  type: string
+                  example: PATCH
+                name:
+                  type: string
+                  example: ABCa
+                address:
+                  type: string
+                  example: azsx
+                email:
+                  type: string
+                  example: aa@b.com
+                phone:
+                  type: integer
+                  example: '1234567890'
+                status:
+                  type: string
+                  description: active,inactive
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Restaturantadmin > Restaurant
+      summary: delete
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '8'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Restaturantadmin > Restaurant
+      summary: show
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '16'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/restaurant/{id}/update-status:
+    post:
+      tags:
+        - Restaturantadmin > Restaurant
+      summary: update status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                _method: patch
+                status: active
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/menu/multiple:
+    post:
+      tags:
+        - Restaturantadmin > Menu
+      summary: store multiple
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                menus[0][order]:
+                  type: integer
+                  example: '5'
+                menus[0][image]:
+                  type: string
+                  format: binary
+                menus[1][order]:
+                  type: integer
+                  example: '2'
+                menus[1][image]:
+                  type: string
+                  format: binary
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/menu:
+    post:
+      tags:
+        - Restaturantadmin > Menu
+      summary: store
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                status:
+                  type: string
+                  description: active,inactive
+                  example: active
+                order:
+                  type: integer
+                  example: '1'
+                image:
+                  type: string
+                  format: binary
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Restaturantadmin > Menu
+      summary: list
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+        - name: paginate
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: page
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: string
+        - name: search_keyword
+          in: query
+          schema:
+            type: string
+        - name: restaurant_id
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/menu/{id}:
+    post:
+      tags:
+        - Restaturantadmin > Menu
+      summary: update
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                _method:
+                  type: string
+                  example: PATCH
+                order:
+                  type: string
+                image:
+                  type: string
+                  format: binary
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '2'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Restaturantadmin > Menu
+      summary: delete
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Restaturantadmin > Menu
+      summary: show
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '39'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/menu/{id}/update-status:
+    post:
+      tags:
+        - Restaturantadmin > Menu
+      summary: update status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                _method: patch
+                status: active
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/menu/{id}/attachment/{file_id}/rename:
+    post:
+      tags:
+        - Restaturantadmin > Menu
+      summary: attachment rename
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: asdffggg
+                _method:
+                  type: string
+                  example: PATCH
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '16'
+        - name: file_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '4'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/menu/{id}/attachment/{file_id}:
+    delete:
+      tags:
+        - Restaturantadmin > Menu
+      summary: attachment delete
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '16'
+        - name: file_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '4'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/menu/{id}/attachment/{file_id}/download:
+    get:
+      tags:
+        - Restaturantadmin > Menu
+      summary: attachment dowload
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '16'
+        - name: file_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '4'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurant/{id}:
+    get:
+      tags:
+        - Public > Restaurant
+      summary: show
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
