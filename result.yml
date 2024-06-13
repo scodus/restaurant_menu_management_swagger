@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  title: Hospitality Management
-  description: Hospitality Management API documentation
+  title: Restaurant Menu Management
+  description: Restaurant Menu Management API documentation
   version: '1.0'
   x-logo:
     url: https://github.com/joolfe/logoBanner.png
@@ -16,7 +16,7 @@ info:
     name: MIT
     url: https://es.wikipedia.org/wiki/Licencia_MIT
 servers:
-  - url: https://hospitality-api.scoduscorp.com
+  - url: https://restaurant-menu-management.scoduscorp.com
     description: server
 components:
   securitySchemes:

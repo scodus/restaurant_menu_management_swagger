@@ -1,8 +1,8 @@
 {
     "info": {
-        "title": "Hospitality Management",
+        "title": "Restaurant Menu Management",
         "version": "1.0",
-        "description": "Hospitality Management API documentation",
+        "description": "Restaurant Menu Management API documentation",
         "termsOfService": "#",
         "license": {
             "name": "MIT",
@@ -21,7 +21,7 @@
     },
     "servers": [
         {
-            "url": "https://hospitality-api.scoduscorp.com",
+            "url": "https://restaurant-menu-management.scoduscorp.com",
             "description": "server"
         }
     ]
