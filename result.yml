@@ -1301,15 +1301,19 @@ paths:
                 address:
                   type: string
                   example: ab
-                email:
-                  type: string
-                  example: a@b.com
                 phone:
                   type: integer
                   example: '1234567890'
-                status:
+                has_used_qr:
                   type: string
                   description: active,inactive
+                  example: 'off'
+                no_of_tables:
+                  type: integer
+                  example: '2'
+                banner:
+                  type: string
+                  format: binary
       security:
         - bearerAuth: []
       responses:
@@ -1366,15 +1370,19 @@ paths:
                 address:
                   type: string
                   example: azsx
-                email:
-                  type: string
-                  example: aa@b.com
                 phone:
                   type: integer
                   example: '1234567890'
-                status:
-                  type: string
+                no_of_tables:
+                  type: integer
                   description: active,inactive
+                  example: '6'
+                has_used_qr:
+                  type: integer
+                  example: '0'
+                banner:
+                  type: string
+                  format: binary
       security:
         - bearerAuth: []
       parameters:
@@ -1383,7 +1391,7 @@ paths:
           schema:
             type: integer
           required: true
-          example: '1'
+          example: '5'
       responses:
         '200':
           description: Successful response

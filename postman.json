@@ -2332,21 +2332,25 @@
 											"type": "text"
 										},
 										{
-											"key": "email",
-											"value": "a@b.com",
-											"type": "text"
-										},
-										{
 											"key": "phone",
 											"value": "1234567890",
 											"type": "text"
 										},
 										{
-											"key": "status",
-											"value": "",
+											"key": "has_used_qr",
+											"value": "off",
 											"description": "active,inactive",
-											"type": "text",
-											"disabled": true
+											"type": "text"
+										},
+										{
+											"key": "no_of_tables",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "banner",
+											"type": "file",
+											"src": "/home/bishal/Projects/scodus/restaurant_menu_management/storage/app/public/11/bc01e72c4439bb98b88f6efb18b15ae2.png"
 										}
 									]
 								},
@@ -2398,21 +2402,25 @@
 											"type": "text"
 										},
 										{
-											"key": "email",
-											"value": "aa@b.com",
-											"type": "text"
-										},
-										{
 											"key": "phone",
 											"value": "1234567890",
 											"type": "text"
 										},
 										{
-											"key": "status",
-											"value": "",
+											"key": "no_of_tables",
+											"value": "6",
 											"description": "active,inactive",
-											"type": "text",
-											"disabled": true
+											"type": "text"
+										},
+										{
+											"key": "has_used_qr",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "banner",
+											"type": "file",
+											"src": "/home/bishal/Projects/scodus/restaurant_menu_management/storage/app/public/11/bc01e72c4439bb98b88f6efb18b15ae2.png"
 										}
 									]
 								},
@@ -2430,7 +2438,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "5"
 										}
 									]
 								}
