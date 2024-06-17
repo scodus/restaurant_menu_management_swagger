@@ -3,8 +3,8 @@
 		"_postman_id": "5420472a-9827-4c67-b2a7-5cf992bd3728",
 		"name": "Restaurant menu management",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "34655126",
-		"_collection_link": "https://bikash-projects.postman.co/workspace/Bikash's-Workspace~07b4d747-08b6-4eac-9f94-41a4bad205fa/collection/34655126-5420472a-9827-4c67-b2a7-5cf992bd3728?action=share&source=collection_link&creator=34655126"
+		"_exporter_id": "30036666",
+		"_collection_link": "https://bikash-projects.postman.co/workspace/Bikash's-Workspace~07b4d747-08b6-4eac-9f94-41a4bad205fa/collection/34655126-5420472a-9827-4c67-b2a7-5cf992bd3728?action=share&source=collection_link&creator=30036666"
 	},
 	"item": [
 		{
@@ -101,12 +101,12 @@
 									"formdata": [
 										{
 											"key": "email",
-											"value": "superadmin@superadmin.com",
+											"value": "test@restaurant.com",
 											"type": "text"
 										},
 										{
 											"key": "password",
-											"value": "P@ssw0rd",
+											"value": "password",
 											"type": "text"
 										}
 									]
@@ -1627,12 +1627,12 @@
 									"formdata": [
 										{
 											"key": "email",
-											"value": "mefedod661@adrais.com",
+											"value": "test@restaurant.com",
 											"type": "text"
 										},
 										{
 											"key": "password",
-											"value": "P@ssw0rd",
+											"value": "password",
 											"type": "text"
 										}
 									]
@@ -2655,13 +2655,14 @@
 									"formdata": [
 										{
 											"key": "menus[0][order]",
-											"value": "5",
-											"type": "text"
+											"value": "9",
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "menus[0][image]",
 											"type": "file",
-											"src": "/C:/Users/Scodus/Downloads/august.jpg"
+											"src": "/home/bishal/Downloads/3MB.png"
 										},
 										{
 											"key": "menus[1][order]",
@@ -2672,8 +2673,22 @@
 										{
 											"key": "menus[1][image]",
 											"type": "file",
-											"src": "/C:/Users/Scodus/Downloads/logoB.jpg",
-											"disabled": true
+											"src": "/home/bishal/Downloads/3MB.png"
+										},
+										{
+											"key": "menus[2][image]",
+											"type": "file",
+											"src": "/home/bishal/Downloads/3MB.png"
+										},
+										{
+											"key": "menus[3][image]",
+											"type": "file",
+											"src": "/home/bishal/Downloads/3MB.png"
+										},
+										{
+											"key": "menus[4][image]",
+											"type": "file",
+											"src": "/home/bishal/Downloads/3MB.png"
 										}
 									]
 								},
@@ -2730,13 +2745,13 @@
 										},
 										{
 											"key": "order",
-											"value": "1",
+											"value": "8",
 											"type": "text"
 										},
 										{
 											"key": "image",
 											"type": "file",
-											"src": "/C:/Users/Scodus/Downloads/august.jpg"
+											"src": "/home/bishal/Downloads/3MB.png"
 										}
 									]
 								},
@@ -2749,6 +2764,63 @@
 										"api",
 										"restaurantadmin",
 										"menu"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update order",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "new_order",
+											"value": "6",
+											"type": "text"
+										},
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/menu/:menu_id/order",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"menu",
+										":menu_id",
+										"order"
+									],
+									"variable": [
+										{
+											"key": "menu_id",
+											"value": "2"
+										}
 									]
 								}
 							},

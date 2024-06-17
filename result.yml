@@ -86,10 +86,10 @@ paths:
               properties:
                 email:
                   type: string
-                  example: superadmin@superadmin.com
+                  example: test@restaurant.com
                 password:
                   type: string
-                  example: P@ssw0rd
+                  example: password
       responses:
         '200':
           description: Successful response
@@ -923,10 +923,10 @@ paths:
               properties:
                 email:
                   type: string
-                  example: mefedod661@adrais.com
+                  example: test@restaurant.com
                 password:
                   type: string
-                  example: P@ssw0rd
+                  example: password
       responses:
         '200':
           description: Successful response
@@ -1465,7 +1465,7 @@ paths:
               properties:
                 menus[0][order]:
                   type: integer
-                  example: '5'
+                  example: '9'
                 menus[0][image]:
                   type: string
                   format: binary
@@ -1473,6 +1473,15 @@ paths:
                   type: integer
                   example: '2'
                 menus[1][image]:
+                  type: string
+                  format: binary
+                menus[2][image]:
+                  type: string
+                  format: binary
+                menus[3][image]:
+                  type: string
+                  format: binary
+                menus[4][image]:
                   type: string
                   format: binary
       security:
@@ -1507,7 +1516,7 @@ paths:
                   example: active
                 order:
                   type: integer
-                  example: '1'
+                  example: '8'
                 image:
                   type: string
                   format: binary
@@ -1557,6 +1566,42 @@ paths:
           in: query
           schema:
             type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/menu/{menu_id}/order:
+    post:
+      tags:
+        - Restaturantadmin > Menu
+      summary: update order
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                new_order:
+                  type: integer
+                  example: '6'
+                _method:
+                  type: string
+                  example: PUT
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+        - name: menu_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '2'
       responses:
         '200':
           description: Successful response
