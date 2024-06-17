@@ -41,6 +41,7 @@ tags:
   - name: Restaturantadmin > Dashboard
   - name: Restaturantadmin > Site Setting
   - name: Restaturantadmin > Restaurant
+  - name: Restaturantadmin > Restaurant > Social Media
   - name: Restaturantadmin > Menu
   - name: Public
   - name: Public > Restaurant
@@ -1279,6 +1280,53 @@ paths:
       tags:
         - Restaturantadmin > Site Setting
       summary: site setting
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/social-medias:
+    post:
+      tags:
+        - Restaturantadmin > Restaurant > Social Media
+      summary: upsert social media link
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  example: instagram
+                link:
+                  type: string
+                  example: https://instagram.com
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Restaturantadmin > Restaurant > Social Media
+      summary: get social media links
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
       responses:
         '200':
           description: Successful response

@@ -2304,6 +2304,108 @@
 					"name": "Restaurant",
 					"item": [
 						{
+							"name": "Social Media",
+							"item": [
+								{
+									"name": "upsert social media link",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "restaurant-id",
+												"value": "1",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "type",
+													"value": "instagram",
+													"type": "text"
+												},
+												{
+													"key": "link",
+													"value": "https://instagram.com",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/restaurantadmin/social-medias",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"restaurantadmin",
+												"social-medias"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "get social media links",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "restaurant-id",
+												"value": "1",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/api/restaurantadmin/social-medias",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"restaurantadmin",
+												"social-medias"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
 							"name": "store",
 							"request": {
 								"auth": {
