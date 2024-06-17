@@ -1528,18 +1528,6 @@ paths:
                 menus[1][order]:
                   type: integer
                   example: '2'
-                menus[1][image]:
-                  type: string
-                  format: binary
-                menus[2][image]:
-                  type: string
-                  format: binary
-                menus[3][image]:
-                  type: string
-                  format: binary
-                menus[4][image]:
-                  type: string
-                  format: binary
       security:
         - bearerAuth: []
       parameters:
@@ -1570,12 +1558,12 @@ paths:
                   type: string
                   description: active,inactive
                   example: active
-                order:
-                  type: integer
-                  example: '8'
                 image:
                   type: string
                   format: binary
+                type:
+                  type: string
+                  example: special
       security:
         - bearerAuth: []
       parameters:

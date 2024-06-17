@@ -2772,33 +2772,13 @@
 										{
 											"key": "menus[0][image]",
 											"type": "file",
-											"src": "/home/bishal/Downloads/3MB.png"
+											"src": "/home/bishal/Downloads/hseb.650fe386.jpg"
 										},
 										{
 											"key": "menus[1][order]",
 											"value": "2",
 											"type": "text",
 											"disabled": true
-										},
-										{
-											"key": "menus[1][image]",
-											"type": "file",
-											"src": "/home/bishal/Downloads/3MB.png"
-										},
-										{
-											"key": "menus[2][image]",
-											"type": "file",
-											"src": "/home/bishal/Downloads/3MB.png"
-										},
-										{
-											"key": "menus[3][image]",
-											"type": "file",
-											"src": "/home/bishal/Downloads/3MB.png"
-										},
-										{
-											"key": "menus[4][image]",
-											"type": "file",
-											"src": "/home/bishal/Downloads/3MB.png"
 										}
 									]
 								},
@@ -2854,14 +2834,14 @@
 											"disabled": true
 										},
 										{
-											"key": "order",
-											"value": "8",
-											"type": "text"
-										},
-										{
 											"key": "image",
 											"type": "file",
-											"src": "/home/bishal/Downloads/3MB.png"
+											"src": "/home/bishal/Downloads/hseb.650fe386.jpg"
+										},
+										{
+											"key": "type",
+											"value": "special",
+											"type": "text"
 										}
 									]
 								},
