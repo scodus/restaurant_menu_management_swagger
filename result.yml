@@ -1890,8 +1890,16 @@ paths:
             schema:
               type: object
               example:
-                name: Wifi 1
-                password: Scodus@2021
+                wifis:
+                  - id: 7
+                    name: Wifi 1 edited
+                    password: Scodus@2021
+                  - id: 8
+                    name: Wifi 2 edited
+                    password: Scodus@2021
+                  - id: 9
+                    name: Wifi 3 edited
+                    password: Scodus@2021
       security:
         - bearerAuth: []
       parameters:
@@ -1976,7 +1984,7 @@ paths:
           schema:
             type: integer
           required: true
-          example: '4'
+          example: '8'
       responses:
         '200':
           description: Successful response

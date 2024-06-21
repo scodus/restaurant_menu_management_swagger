@@ -3387,7 +3387,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"Wifi 1\",\n    \"password\": \"Scodus@2021\"\n}",
+									"raw": "{\n    \"wifis\": [\n        {\n            \"id\": 7,\n            \"name\": \"Wifi 1 edited\",\n            \"password\": \"Scodus@2021\"\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Wifi 2 edited\",\n            \"password\": \"Scodus@2021\"\n        },\n        {\n            \"id\": 9,\n            \"name\": \"Wifi 3 edited\",\n            \"password\": \"Scodus@2021\"\n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3499,7 +3499,7 @@
 									"variable": [
 										{
 											"key": "wifi_id",
-											"value": "4"
+											"value": "8"
 										}
 									]
 								}
