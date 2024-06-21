@@ -3587,6 +3587,65 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Feedbacks",
+					"item": [
+						{
+							"name": "get feedback list",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/restaurant/:restaurant_id/feedbacks",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurant",
+										":restaurant_id",
+										"feedbacks"
+									],
+									"variable": [
+										{
+											"key": "restaurant_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create new feedback",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"rating\": 4,\n    \"review\": \"This is goood\",\n    \"restaurant_id\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurant/feedbacks",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurant",
+										"feedbacks"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}
