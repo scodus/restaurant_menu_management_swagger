@@ -2772,7 +2772,7 @@
 										{
 											"key": "menus[0][image]",
 											"type": "file",
-											"src": "/home/bishal/Downloads/hseb.650fe386.jpg"
+											"src": "/home/bishal/Downloads/menu2.jpeg"
 										},
 										{
 											"key": "menus[1][order]",
@@ -2783,7 +2783,7 @@
 									]
 								},
 								"url": {
-									"raw": "{{url}}/api/restaurantadmin/menu/multiple",
+									"raw": "{{url}}/api/restaurantadmin/menu/multiple?max_width=2000",
 									"host": [
 										"{{url}}"
 									],
@@ -2792,6 +2792,12 @@
 										"restaurantadmin",
 										"menu",
 										"multiple"
+									],
+									"query": [
+										{
+											"key": "max_width",
+											"value": "2000"
+										}
 									]
 								}
 							},
@@ -2836,17 +2842,17 @@
 										{
 											"key": "image",
 											"type": "file",
-											"src": "/home/bishal/Downloads/hseb.650fe386.jpg"
+											"src": "/home/bishal/Downloads/4MB .jpg"
 										},
 										{
 											"key": "type",
-											"value": "special",
+											"value": "",
 											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "{{url}}/api/restaurantadmin/menu",
+									"raw": "{{url}}/api/restaurantadmin/menu?max_width=2000",
 									"host": [
 										"{{url}}"
 									],
@@ -2854,6 +2860,12 @@
 										"api",
 										"restaurantadmin",
 										"menu"
+									],
+									"query": [
+										{
+											"key": "max_width",
+											"value": "2000"
+										}
 									]
 								}
 							},
@@ -3342,6 +3354,188 @@
 											"key": "file_id",
 											"value": "4"
 										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Wifi",
+					"item": [
+						{
+							"name": "create new wifi",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Wifi 1\",\n    \"password\": \"Scodus@2021\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/wifi",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"wifi"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update wifi",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Wifi 2\",\n    \"password\": \"Scodus@2021\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/wifi/:wifi_id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"wifi",
+										":wifi_id"
+									],
+									"variable": [
+										{
+											"key": "wifi_id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete wifi",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/wifi/:wifi_id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"wifi",
+										":wifi_id"
+									],
+									"variable": [
+										{
+											"key": "wifi_id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "list wifi",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/wifi",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"wifi"
 									]
 								}
 							},
