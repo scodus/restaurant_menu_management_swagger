@@ -101,12 +101,12 @@
 									"formdata": [
 										{
 											"key": "email",
-											"value": "superadmin@superadmin.com",
+											"value": "test@restaurant.com",
 											"type": "text"
 										},
 										{
 											"key": "password",
-											"value": "P@ssw0rd",
+											"value": "password",
 											"type": "text"
 										}
 									]
@@ -1627,12 +1627,12 @@
 									"formdata": [
 										{
 											"key": "email",
-											"value": "mefedod661@adrais.com",
+											"value": "test@restaurant.com",
 											"type": "text"
 										},
 										{
 											"key": "password",
-											"value": "P@ssw0rd",
+											"value": "password",
 											"type": "text"
 										}
 									]
@@ -2304,6 +2304,108 @@
 					"name": "Restaurant",
 					"item": [
 						{
+							"name": "Social Media",
+							"item": [
+								{
+									"name": "upsert social media link",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "restaurant-id",
+												"value": "1",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "type",
+													"value": "instagram",
+													"type": "text"
+												},
+												{
+													"key": "link",
+													"value": "https://instagram.com",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/restaurantadmin/social-medias",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"restaurantadmin",
+												"social-medias"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "get social media links",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "restaurant-id",
+												"value": "1",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/api/restaurantadmin/social-medias",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"restaurantadmin",
+												"social-medias"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
 							"name": "store",
 							"request": {
 								"auth": {
@@ -2332,21 +2434,25 @@
 											"type": "text"
 										},
 										{
-											"key": "email",
-											"value": "a@b.com",
-											"type": "text"
-										},
-										{
 											"key": "phone",
 											"value": "1234567890",
 											"type": "text"
 										},
 										{
-											"key": "status",
-											"value": "",
+											"key": "has_used_qr",
+											"value": "off",
 											"description": "active,inactive",
-											"type": "text",
-											"disabled": true
+											"type": "text"
+										},
+										{
+											"key": "no_of_tables",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "banner",
+											"type": "file",
+											"src": "/home/bishal/Projects/scodus/restaurant_menu_management/storage/app/public/11/bc01e72c4439bb98b88f6efb18b15ae2.png"
 										}
 									]
 								},
@@ -2398,21 +2504,25 @@
 											"type": "text"
 										},
 										{
-											"key": "email",
-											"value": "aa@b.com",
-											"type": "text"
-										},
-										{
 											"key": "phone",
 											"value": "1234567890",
 											"type": "text"
 										},
 										{
-											"key": "status",
-											"value": "",
+											"key": "no_of_tables",
+											"value": "6",
 											"description": "active,inactive",
-											"type": "text",
-											"disabled": true
+											"type": "text"
+										},
+										{
+											"key": "has_used_qr",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "banner",
+											"type": "file",
+											"src": "/home/bishal/Projects/scodus/restaurant_menu_management/storage/app/public/11/bc01e72c4439bb98b88f6efb18b15ae2.png"
 										}
 									]
 								},
@@ -2430,7 +2540,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "5"
 										}
 									]
 								}
@@ -2655,30 +2765,25 @@
 									"formdata": [
 										{
 											"key": "menus[0][order]",
-											"value": "5",
-											"type": "text"
+											"value": "9",
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "menus[0][image]",
 											"type": "file",
-											"src": "/C:/Users/Scodus/Downloads/august.jpg"
+											"src": "/home/bishal/Downloads/menu2.jpeg"
 										},
 										{
 											"key": "menus[1][order]",
 											"value": "2",
 											"type": "text",
 											"disabled": true
-										},
-										{
-											"key": "menus[1][image]",
-											"type": "file",
-											"src": "/C:/Users/Scodus/Downloads/logoB.jpg",
-											"disabled": true
 										}
 									]
 								},
 								"url": {
-									"raw": "{{url}}/api/restaurantadmin/menu/multiple",
+									"raw": "{{url}}/api/restaurantadmin/menu/multiple?max_width=2000",
 									"host": [
 										"{{url}}"
 									],
@@ -2687,6 +2792,12 @@
 										"restaurantadmin",
 										"menu",
 										"multiple"
+									],
+									"query": [
+										{
+											"key": "max_width",
+											"value": "2000"
+										}
 									]
 								}
 							},
@@ -2729,19 +2840,19 @@
 											"disabled": true
 										},
 										{
-											"key": "order",
-											"value": "1",
-											"type": "text"
-										},
-										{
 											"key": "image",
 											"type": "file",
-											"src": "/C:/Users/Scodus/Downloads/august.jpg"
+											"src": "/home/bishal/Downloads/4MB .jpg"
+										},
+										{
+											"key": "type",
+											"value": "",
+											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "{{url}}/api/restaurantadmin/menu",
+									"raw": "{{url}}/api/restaurantadmin/menu?max_width=2000",
 									"host": [
 										"{{url}}"
 									],
@@ -2749,6 +2860,69 @@
 										"api",
 										"restaurantadmin",
 										"menu"
+									],
+									"query": [
+										{
+											"key": "max_width",
+											"value": "2000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update order",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "new_order",
+											"value": "6",
+											"type": "text"
+										},
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/menu/:menu_id/order",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"menu",
+										":menu_id",
+										"order"
+									],
+									"variable": [
+										{
+											"key": "menu_id",
+											"value": "2"
+										}
 									]
 								}
 							},
@@ -3186,6 +3360,409 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Feedback",
+					"item": [
+						{
+							"name": "update status",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "6"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_method\": \"patch\",\n    \"is_read\": false//true,false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/feedback/:id/update-status",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"feedback",
+										":id",
+										"update-status"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/feedback/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"feedback",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "list",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/feedback?paginate=1&page=&limit=&search_keyword=&restaurant_id&is_read",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"feedback"
+									],
+									"query": [
+										{
+											"key": "paginate",
+											"value": "1"
+										},
+										{
+											"key": "page",
+											"value": ""
+										},
+										{
+											"key": "limit",
+											"value": ""
+										},
+										{
+											"key": "search_keyword",
+											"value": ""
+										},
+										{
+											"key": "restaurant_id",
+											"value": null
+										},
+										{
+											"key": "is_read",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/feedback/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"feedback",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Wifi",
+					"item": [
+						{
+							"name": "create new wifi",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"wifis\": [\n        {\n            \"id\": 7,\n            \"name\": \"Wifi 1 edited\",\n            \"password\": \"Scodus@2021\"\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Wifi 2 edited\",\n            \"password\": \"Scodus@2021\"\n        },\n        {\n            \"id\": 9,\n            \"name\": \"Wifi 3 edited\",\n            \"password\": \"Scodus@2021\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/wifi",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"wifi"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update wifi",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Wifi 2\",\n    \"password\": \"Scodus@2021\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/wifi/:wifi_id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"wifi",
+										":wifi_id"
+									],
+									"variable": [
+										{
+											"key": "wifi_id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete wifi",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/wifi/:wifi_id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"wifi",
+										":wifi_id"
+									],
+									"variable": [
+										{
+											"key": "wifi_id",
+											"value": "8"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "list wifi",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/restaurantadmin/wifi",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurantadmin",
+										"wifi"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
@@ -3225,6 +3802,99 @@
 											"key": "id",
 											"value": "1"
 										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Feedback",
+					"item": [
+						{
+							"name": "store",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "restaurant-id",
+										"value": "1",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"rating\": 4,\n    \"review\": \"This is goood\",\n    \"restaurant_id\": 6,\n    \"device_id\":122\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/feedback",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"feedback"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get feedback list old",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/restaurant/:restaurant_id/feedbacks",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurant",
+										":restaurant_id",
+										"feedbacks"
+									],
+									"variable": [
+										{
+											"key": "restaurant_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create new feedback old",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"rating\": 4,\n    \"review\": \"This is goood\",\n    \"restaurant_id\": 1,\n    \"device_id\":122\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/restaurant/feedbacks",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"restaurant",
+										"feedbacks"
 									]
 								}
 							},

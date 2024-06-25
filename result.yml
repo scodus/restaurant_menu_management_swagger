@@ -41,9 +41,13 @@ tags:
   - name: Restaturantadmin > Dashboard
   - name: Restaturantadmin > Site Setting
   - name: Restaturantadmin > Restaurant
+  - name: Restaturantadmin > Restaurant > Social Media
   - name: Restaturantadmin > Menu
+  - name: Restaturantadmin > Feedback
+  - name: Restaturantadmin > Wifi
   - name: Public
   - name: Public > Restaurant
+  - name: Public > Feedback
 paths:
   /api/superadmin/login/{provider}/callback:
     post:
@@ -86,10 +90,10 @@ paths:
               properties:
                 email:
                   type: string
-                  example: superadmin@superadmin.com
+                  example: test@restaurant.com
                 password:
                   type: string
-                  example: P@ssw0rd
+                  example: password
       responses:
         '200':
           description: Successful response
@@ -923,10 +927,10 @@ paths:
               properties:
                 email:
                   type: string
-                  example: mefedod661@adrais.com
+                  example: test@restaurant.com
                 password:
                   type: string
-                  example: P@ssw0rd
+                  example: password
       responses:
         '200':
           description: Successful response
@@ -1284,6 +1288,53 @@ paths:
           description: Successful response
           content:
             application/json: {}
+  /api/restaurantadmin/social-medias:
+    post:
+      tags:
+        - Restaturantadmin > Restaurant > Social Media
+      summary: upsert social media link
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  example: instagram
+                link:
+                  type: string
+                  example: https://instagram.com
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Restaturantadmin > Restaurant > Social Media
+      summary: get social media links
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
   /api/restaurantadmin/restaurant:
     post:
       tags:
@@ -1301,15 +1352,19 @@ paths:
                 address:
                   type: string
                   example: ab
-                email:
-                  type: string
-                  example: a@b.com
                 phone:
                   type: integer
                   example: '1234567890'
-                status:
+                has_used_qr:
                   type: string
                   description: active,inactive
+                  example: 'off'
+                no_of_tables:
+                  type: integer
+                  example: '2'
+                banner:
+                  type: string
+                  format: binary
       security:
         - bearerAuth: []
       responses:
@@ -1366,15 +1421,19 @@ paths:
                 address:
                   type: string
                   example: azsx
-                email:
-                  type: string
-                  example: aa@b.com
                 phone:
                   type: integer
                   example: '1234567890'
-                status:
-                  type: string
+                no_of_tables:
+                  type: integer
                   description: active,inactive
+                  example: '6'
+                has_used_qr:
+                  type: integer
+                  example: '0'
+                banner:
+                  type: string
+                  format: binary
       security:
         - bearerAuth: []
       parameters:
@@ -1383,7 +1442,7 @@ paths:
           schema:
             type: integer
           required: true
-          example: '1'
+          example: '5'
       responses:
         '200':
           description: Successful response
@@ -1465,16 +1524,13 @@ paths:
               properties:
                 menus[0][order]:
                   type: integer
-                  example: '5'
+                  example: '9'
                 menus[0][image]:
                   type: string
                   format: binary
                 menus[1][order]:
                   type: integer
                   example: '2'
-                menus[1][image]:
-                  type: string
-                  format: binary
       security:
         - bearerAuth: []
       parameters:
@@ -1483,6 +1539,11 @@ paths:
           schema:
             type: integer
           example: '1'
+        - name: max_width
+          in: query
+          schema:
+            type: integer
+          example: '2000'
       responses:
         '200':
           description: Successful response
@@ -1505,12 +1566,11 @@ paths:
                   type: string
                   description: active,inactive
                   example: active
-                order:
-                  type: integer
-                  example: '1'
                 image:
                   type: string
                   format: binary
+                type:
+                  type: string
       security:
         - bearerAuth: []
       parameters:
@@ -1519,6 +1579,11 @@ paths:
           schema:
             type: integer
           example: '1'
+        - name: max_width
+          in: query
+          schema:
+            type: integer
+          example: '2000'
       responses:
         '200':
           description: Successful response
@@ -1557,6 +1622,42 @@ paths:
           in: query
           schema:
             type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/menu/{menu_id}/order:
+    post:
+      tags:
+        - Restaturantadmin > Menu
+      summary: update order
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                new_order:
+                  type: integer
+                  example: '6'
+                _method:
+                  type: string
+                  example: PUT
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+        - name: menu_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '2'
       responses:
         '200':
           description: Successful response
@@ -1780,6 +1881,239 @@ paths:
           description: Successful response
           content:
             application/json: {}
+  /api/restaurantadmin/feedback/{id}/update-status:
+    post:
+      tags:
+        - Restaturantadmin > Feedback
+      summary: update status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                _method: patch
+                is_read: false
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '6'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '4'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/feedback/{id}:
+    delete:
+      tags:
+        - Restaturantadmin > Feedback
+      summary: delete
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Restaturantadmin > Feedback
+      summary: show
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/feedback:
+    get:
+      tags:
+        - Restaturantadmin > Feedback
+      summary: list
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+        - name: paginate
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: page
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: string
+        - name: search_keyword
+          in: query
+          schema:
+            type: string
+        - name: restaurant_id
+          in: query
+          schema:
+            type: string
+        - name: is_read
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/wifi:
+    post:
+      tags:
+        - Restaturantadmin > Wifi
+      summary: create new wifi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                wifis:
+                  - id: 7
+                    name: Wifi 1 edited
+                    password: Scodus@2021
+                  - id: 8
+                    name: Wifi 2 edited
+                    password: Scodus@2021
+                  - id: 9
+                    name: Wifi 3 edited
+                    password: Scodus@2021
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Restaturantadmin > Wifi
+      summary: list wifi
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurantadmin/wifi/{wifi_id}:
+    put:
+      tags:
+        - Restaturantadmin > Wifi
+      summary: update wifi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Wifi 2
+                password: Scodus@2021
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+        - name: wifi_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '4'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Restaturantadmin > Wifi
+      summary: delete wifi
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: restaurant-id
+          in: header
+          schema:
+            type: integer
+          example: '1'
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: wifi_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '8'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
   /api/restaurant/{id}:
     get:
       tags:
@@ -1794,6 +2128,63 @@ paths:
             type: integer
           required: true
           example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/feedback:
+    post:
+      tags:
+        - Public > Feedback
+      summary: store
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                rating: 4
+                review: This is goood
+                restaurant_id: 6
+                device_id: 122
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurant/{restaurant_id}/feedbacks:
+    get:
+      tags:
+        - Public > Feedback
+      summary: get feedback list old
+      parameters:
+        - name: restaurant_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/restaurant/feedbacks:
+    post:
+      tags:
+        - Public > Feedback
+      summary: create new feedback old
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                rating: 4
+                review: This is goood
+                restaurant_id: 1
+                device_id: 122
       responses:
         '200':
           description: Successful response
