@@ -1478,7 +1478,7 @@ paths:
           schema:
             type: integer
           required: true
-          example: '16'
+          example: '7'
       responses:
         '200':
           description: Successful response
@@ -1531,6 +1531,10 @@ paths:
                 menus[1][order]:
                   type: integer
                   example: '2'
+                menus[0][type]:
+                  type: string
+                menus[0][status]:
+                  type: string
       security:
         - bearerAuth: []
       parameters:
@@ -1538,7 +1542,7 @@ paths:
           in: header
           schema:
             type: integer
-          example: '1'
+          example: '7'
         - name: max_width
           in: query
           schema:
@@ -1562,15 +1566,16 @@ paths:
               properties:
                 title:
                   type: string
+                image:
+                  type: string
+                  format: binary
                 status:
                   type: string
                   description: active,inactive
                   example: active
-                image:
-                  type: string
-                  format: binary
                 type:
                   type: string
+                  example: special
       security:
         - bearerAuth: []
       parameters:
@@ -1578,7 +1583,7 @@ paths:
           in: header
           schema:
             type: integer
-          example: '1'
+          example: '7'
         - name: max_width
           in: query
           schema:
@@ -1600,7 +1605,7 @@ paths:
           in: header
           schema:
             type: integer
-          example: '1'
+          example: '7'
         - name: paginate
           in: query
           schema:

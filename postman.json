@@ -2728,7 +2728,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "16"
+											"value": "7"
 										}
 									]
 								}
@@ -2757,7 +2757,7 @@
 								"header": [
 									{
 										"key": "restaurant-id",
-										"value": "1"
+										"value": "7"
 									}
 								],
 								"body": {
@@ -2772,13 +2772,23 @@
 										{
 											"key": "menus[0][image]",
 											"type": "file",
-											"src": "/home/bishal/Downloads/menu2.jpeg"
+											"src": "/C:/Users/Scodus/Downloads/Wings factory.jpg"
 										},
 										{
 											"key": "menus[1][order]",
 											"value": "2",
 											"type": "text",
 											"disabled": true
+										},
+										{
+											"key": "menus[0][type]",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "menus[0][status]",
+											"value": "",
+											"type": "text"
 										}
 									]
 								},
@@ -2820,7 +2830,7 @@
 								"header": [
 									{
 										"key": "restaurant-id",
-										"value": "1"
+										"value": "7"
 									}
 								],
 								"body": {
@@ -2833,20 +2843,19 @@
 											"disabled": true
 										},
 										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/Scodus/Downloads/Wings factory.jpg"
+										},
+										{
 											"key": "status",
 											"value": "active",
 											"description": "active,inactive",
-											"type": "text",
-											"disabled": true
-										},
-										{
-											"key": "image",
-											"type": "file",
-											"src": "/home/bishal/Downloads/4MB .jpg"
+											"type": "text"
 										},
 										{
 											"key": "type",
-											"value": "",
+											"value": "special",
 											"type": "text"
 										}
 									]
@@ -3105,7 +3114,7 @@
 								"header": [
 									{
 										"key": "restaurant-id",
-										"value": "1"
+										"value": "7"
 									}
 								],
 								"body": {
