@@ -18,6 +18,8 @@ info:
 servers:
   - url: https://restaurant-menu-management.scoduscorp.com
     description: server
+  - url: https://link.scoduscorp.com
+    description: test server
 components:
   securitySchemes:
     noauthAuth:
@@ -1365,6 +1367,12 @@ paths:
                 banner:
                   type: string
                   format: binary
+                software_used:
+                  type: string
+                brand_color:
+                  type: string
+                text_color:
+                  type: string
       security:
         - bearerAuth: []
       responses:
@@ -1434,6 +1442,12 @@ paths:
                 banner:
                   type: string
                   format: binary
+                software_used:
+                  type: string
+                brand_color:
+                  type: string
+                text_color:
+                  type: string
       security:
         - bearerAuth: []
       parameters:

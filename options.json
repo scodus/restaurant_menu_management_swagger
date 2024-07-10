@@ -23,6 +23,10 @@
         {
             "url": "https://restaurant-menu-management.scoduscorp.com",
             "description": "server"
+        },
+        {
+            "url": "https://link.scoduscorp.com",
+            "description": "test server"
         }
     ]
 }

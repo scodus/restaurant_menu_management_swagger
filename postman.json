@@ -2453,6 +2453,21 @@
 											"key": "banner",
 											"type": "file",
 											"src": "/home/bishal/Projects/scodus/restaurant_menu_management/storage/app/public/11/bc01e72c4439bb98b88f6efb18b15ae2.png"
+										},
+										{
+											"key": "software_used",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "brand_color",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "text_color",
+											"value": "",
+											"type": "text"
 										}
 									]
 								},
@@ -2523,6 +2538,21 @@
 											"key": "banner",
 											"type": "file",
 											"src": "/home/bishal/Projects/scodus/restaurant_menu_management/storage/app/public/11/bc01e72c4439bb98b88f6efb18b15ae2.png"
+										},
+										{
+											"key": "software_used",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "brand_color",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "text_color",
+											"value": "",
+											"type": "text"
 										}
 									]
 								},
